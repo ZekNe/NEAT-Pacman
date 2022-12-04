@@ -79,16 +79,17 @@ class wall:
     def get_mask(self):
         return pygame.mask.from_surface(self.img)
 
-    def collide(self, pman_mask):
-        pacman_mask = pman_mask
-        wall_mask = self.get_mask()
+    # def collide(self, pman_mask):
+    #     pacman_mask = pman_mask
+    #     wall_mask = self.get_mask()
 
-        if pygame.sprite.collide_mask(pacman_mask, wall_mask) == True:
-            print("Collision")
+    #     if pygame.sprite.collide_mask(pacman_mask, wall_mask) == True:
+    #         print("Collision")
 
 
 
 def game_map(win):
+    walls = []
     map =  [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -113,6 +114,7 @@ def game_map(win):
         for k in i:           
             if k == 1:
                 wall(x,y).draw(win)
+                walls.append(wall(x,y))
             x += 30
         x = 0
         y += 30
@@ -142,8 +144,6 @@ def main():
     while run:
         clock.tick(25)
         for event in pygame.event.get():
-            pacman_mask = pman.get_mask()
-            wall_mask = walltest.get_mask()
 
             if event.type == pygame.QUIT:
                 run = False
@@ -160,8 +160,8 @@ def main():
                 if event.key == pygame.K_UP:
                     direction = "up"
 
-            elif wall.collide(pacman_mask, 1) == True:
-                return print("Ouch!")
+            # elif wall.collide(pacman_mask, 1) == True:
+            #     return print("Ouch!")
 
         game_window(win, pman, direction)
 
